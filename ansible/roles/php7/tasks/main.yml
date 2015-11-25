@@ -1,0 +1,14 @@
+---
+- name: Add PHP 7 Apt repo
+  apt_repository:
+    repo: ppa:ondrej/php-7.0
+    state: present
+    update_cache: yes
+  sudo: yes
+
+- name: Install PHP 7 extensions
+  apt:
+    name: php7.0-{{ item }}
+    state: present
+  with_items: extensions
+  sudo: yes

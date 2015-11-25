@@ -1,0 +1,32 @@
+---
+- name: Add common packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - vim
+    - htop
+    - iotop
+    - git
+
+- name: Check if Chef client exits
+  stat: path=/etc/init.d/chef-client
+  register: chef_client
+
+- name: Disable Chef client from starting automatically
+  service:
+    name: chef-client
+    enabled: no
+    state: stopped
+  when: chef_client.stat.exists
+
+- name: Check if Puppet client exits
+  stat: path=/etc/init.d/puppet
+  register: puppet_client
+
+- name: Disable Puppet client from starting automatically
+  service:
+    name: puppet
+    enabled: no
+    state: stopped
+  when: puppet_client.stat.exists

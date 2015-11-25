@@ -1,0 +1,5 @@
+---
+- hosts: all
+  roles:
+    - { role: common, sudo: yes }
+    - { role: php7, extensions: ["cli"] }
