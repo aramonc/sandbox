@@ -2,5 +2,5 @@
 - hosts: all
   roles:
     - { role: common, sudo: yes }
-    - { role: php7, extensions: ["cli"] }
+    - { role: php7, extensions: ["php7.0-cli", "php-xdebug"] }
     - { role: composer }
